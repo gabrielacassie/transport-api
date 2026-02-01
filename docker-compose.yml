@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  bus-service:
+    build: ./backend/bus-service
+    ports:
+      - "5001:5000"
+    environment:
+      - PORT=5000
+
+  taxi-service:
+    build: ./backend/taxi-service
+    ports:
+      - "5002:5000"
+    environment:
+      - PORT=5000
+
+  train-service:
+    build: ./backend/train-service
+    ports:
+      - "5003:5000"
+    environment:
+      - PORT=5000
+
+  auth-service:
+    build: ./backend/auth-service
+    ports:
+      - "5004:5000"
+    environment:
+      - PORT=5000
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:5173"
+    depends_on:
+      - bus-service
+      - taxi-service
+      - train-service
+      - auth-service

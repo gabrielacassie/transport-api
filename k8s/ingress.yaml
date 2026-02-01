@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: transport-ingress
+spec:
+  rules:
+  - host: transport.local
+    http:
+      paths:
+      - path: /bus
+        pathType: Prefix
+        backend:
+          service:
+            name: bus-service
+            port:
+              number: 80
+      - path: /train
+        pathType: Prefix
+        backend:
+          service:
+            name: train-service
+            port:
+              number: 80
+      - path: /taxi
+        pathType: Prefix
+        backend:
+          service:
+            name: taxi-service
+            port:
+              number: 80
